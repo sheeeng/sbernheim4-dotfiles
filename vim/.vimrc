@@ -24,20 +24,16 @@ set background=dark
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Adds 30ms
-source ~/dotfiles/vim/mappings.vim
-source ~/dotfiles/vim/settings.vim
-source ~/dotfiles/vim/statusLine.vim
-source ~/dotfiles/vim/highlights.vim
-
 " Load Plugin Settings
-source ~/dotfiles/vim/vim-plugins/ale.vim
 source ~/dotfiles/vim/vim-plugins/argwrap.vim
 source ~/dotfiles/vim/vim-plugins/sideways.vim
 source ~/dotfiles/vim/vim-plugins/signify.vim
 
 " Load Lua Plugins
 lua << EOF
+require 'status_line'
+require 'vim_settings'
+
 require 'lazy_config'
 require 'lsp_signature_settings'
 require 'lspconfig_settings'

@@ -130,7 +130,7 @@ return require('lazy').setup({
 			{ "<leader>q",  function() Snacks.bufdelete() end,                                      desc = "Delete Buffer" },
 			{ "<leader>rf", function() Snacks.rename.rename_file() end,                             desc = "Rename File" },
 			{ "<leader>gB", function() Snacks.gitbrowse() end,                                      desc = "Git Browse",               mode = { "n", "v" } },
-			{ "<leader>gg", function() Snacks.lazygit() end,                                        desc = "Lazygit" },
+			-- { "<leader>gg", function() Snacks.lazygit() end,                                        desc = "Lazygit" },
 			{ "<leader>un", function() Snacks.notifier.hide() end,                                  desc = "Dismiss All Notifications" },
 			{ "<c-/>",      function() Snacks.terminal() end,                                       desc = "Toggle Terminal" },
 			{ "<c-_>",      function() Snacks.terminal() end,                                       desc = "which_key_ignore" },
@@ -171,13 +171,16 @@ return require('lazy').setup({
 					-- Create some toggle mappings
 					Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>us")
 					Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
-					Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>uL")
+					Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map(
+						"<leader>uL")
 					Snacks.toggle.diagnostics():map("<leader>ud")
 					Snacks.toggle.line_number():map("<leader>ul")
 					Snacks.toggle.option("conceallevel",
-						{ off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 }):map("<leader>uc")
+						{ off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 })
+					    :map("<leader>uc")
 					Snacks.toggle.treesitter():map("<leader>uT")
-					Snacks.toggle.option("background", { off = "light", on = "dark", name = "Dark Background" }):map(
+					Snacks.toggle.option("background",
+						{ off = "light", on = "dark", name = "Dark Background" }):map(
 						"<leader>ub")
 					Snacks.toggle.inlay_hints():map("<leader>uh")
 					Snacks.toggle.indent():map("<leader>ug")

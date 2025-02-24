@@ -28,13 +28,11 @@ set background=dark
 source ~/dotfiles/vim/mappings.vim
 source ~/dotfiles/vim/settings.vim
 source ~/dotfiles/vim/statusLine.vim
-source ~/dotfiles/vim/tabLine.vim
 source ~/dotfiles/vim/highlights.vim
 
 " Load Plugin Settings
 source ~/dotfiles/vim/vim-plugins/ale.vim
 source ~/dotfiles/vim/vim-plugins/argwrap.vim
-source ~/dotfiles/vim/vim-plugins/fzf.vim
 source ~/dotfiles/vim/vim-plugins/sideways.vim
 source ~/dotfiles/vim/vim-plugins/signify.vim
 
@@ -43,16 +41,12 @@ lua << EOF
 require 'lazy_config'
 require 'lsp_signature_settings'
 require 'lspconfig_settings'
-require 'nvim_tree_settings'
-require 'lspfuzzy_settings'
 require 'nvim_treesitter_settings'
 require 'navic_settings'
 require 'nvim_treesitter_context'
 require 'cmp_settings'
 require 'symbols_outline_settings'
-require 'telescope_settings'
 require 'helper_functions'
-require 'dashboard_settings'
 require 'mappings'
 
 local links = {

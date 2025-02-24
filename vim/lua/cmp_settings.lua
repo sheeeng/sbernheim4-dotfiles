@@ -1,3 +1,5 @@
+vim.api.nvim_set_hl(0, "NormalFloat", { bg = '#282828' })
+
 local cmp = require('cmp')
 
 local has_words_before = function()

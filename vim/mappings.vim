@@ -97,7 +97,7 @@ nnoremap tw :call ToggleTextWidth()<CR>
 " ########################################################################
 nnoremap <Leader>n :bn<CR>
 nnoremap <Leader>p :bp<CR>
-nnoremap <Leader>q :bp <BAR> bd #<CR>
+"" nnoremap <Leader>q :bp <BAR> bd #<CR>
 
 nnoremap <Leader>vp :vsplit<CR>
 nnoremap <Leader>hp :split<CR>

@@ -1,26 +1,32 @@
-require('neodev').setup({
-	-- add any options here, or leave empty to use the default settings
-})
-
 local lspconfig = require('lspconfig')
 local cmp = require('cmp_nvim_lsp')
-local lsp_installer = require('nvim-lsp-installer')
 local navic = require('nvim-navic')
 
-lsp_installer.setup {
-	automatic_installation = true, -- automatically detect which servers to install (based on which servers are set up via lspconfig)
-	ui = {
-		icons = {
-			server_installed = "✓",
-			server_pending = "➜",
-			server_uninstalled = "✗"
-		}
-	}
+require('neodev').setup({})
+require("mason").setup()
+require("mason-lspconfig").setup {
+	ensure_installed = {
+		"lua_ls",
+		"rust_analyzer",
+		'eslint',
+		'intelephense',
+		'jsonls',
+		'rust_analyzer',
+		'cssls',
+		'gopls',
+		'vimls',
+		'bashls',
+		'graphql',
+		'vimls',
+		'yamlls',
+		'pyright',
+		'graphql',
+		'lua_ls',
+
+	},
 }
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
-
 local on_attach = function(client, bufnr)
 	if client.server_capabilities.documentSymbolProvider then
 		navic.attach(client, bufnr)
@@ -38,9 +44,22 @@ lspconfig.jsonls.setup { capabilities = completion_capabilities, on_attach = on_
 lspconfig.rust_analyzer.setup { capabilities = completion_capabilities, on_attach = on_attach }
 lspconfig.cssls.setup { capabilities = completion_capabilities, on_attach = on_attach }
 lspconfig.gopls.setup { capabilities = capabilities, on_attach = on_attach }
-lspconfig.ts_ls.setup { capabilities = completion_capabilities, on_attach = on_attach }
+require("typescript-tools").setup {
+	capabilities = completion_capabilities,
+	on_attach = on_attach,
+	settings = {
+		tsserver_file_preferences = {
+			includeInlayParameterNameHints = "all",
+			includeCompletionsForModuleExports = true,
+			quotePreference = "auto",
+		},
+		tsserver_format_options = {
+			allowIncompleteCompletions = false,
+			allowRenameOfImportPath = false,
+		}
+	},
+}
 lspconfig.vimls.setup { capabilities = completion_capabilities, on_attach = on_attach }
-lspconfig.metals.setup { capabilities = completion_capabilities, on_attach = on_attach }
 lspconfig.bashls.setup { capabilities = completion_capabilities, on_attach = on_attach }
 lspconfig.graphql.setup { capabilities = completion_capabilities, on_attach = on_attach }
 lspconfig.vimls.setup { capabilities = completion_capabilities, on_attach = on_attach }
@@ -96,17 +115,26 @@ lspconfig.lua_ls.setup {
 
 
 -- LSP Config Mappings
-vim.api.nvim_set_keymap('n', '<Leader>gd', ':lua vim.lsp.buf.definition()<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<Leader>gd', ':lua vim.lsp.buf.definition()<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<Leader>td', ':lua vim.lsp.buf.type_definition()<CR>', { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap('n', '<Leader>gd', ':lua vim.lsp.buf.definition()<CR>', { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap('n', '<Leader>gd', ':lua vim.lsp.buf.definition()<CR>', { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap('n', '<Leader>td', ':lua vim.lsp.buf.type_definition()<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<Leader>fr', ':lua vim.lsp.buf.references()<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<Leader>rn', ':lua vim.lsp.buf.rename()<CR>', { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap('n', '<Leader>rn', ':lua vim.lsp.buf.rename()<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<Leader>ac', ':lua vim.lsp.buf.code_action()<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<Leader>gg', ':lua vim.diagnostic.open_float()<CR>', { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap('n', '<Leader>gg', ':lua vim.diagnostic.open_float()<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>gn', ':lua vim.diagnostic.goto_next()<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>gp', ':lua vim.diagnostic.goto_prev()<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<Leader>s', ':lua vim.lsp.buf.workspace_symbol()<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', 'K', ':lua vim.lsp.buf.hover()<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<Leader>c', ':lua vim.lsp.buf.format({async = true})<CR>',
-	{ noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<Leader>ee', ':lua vim.diagnostic.setqflist()<CR>', { noremap = true, silent = true });
+vim.api.nvim_set_keymap(
+	'n',
+	'<Leader>c',
+	':lua vim.lsp.buf.format({async = true})<CR>',
+	{ noremap = true, silent = true }
+)
+vim.api.nvim_set_keymap(
+	'n',
+	'<Leader>ee',
+	':lua vim.diagnostic.setqflist()<CR>',
+	{ noremap = true, silent = true }
+);

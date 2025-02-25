@@ -16,7 +16,6 @@ let g:qf_shorten_path = 0
 " ########################################################################
 " ######## Color Scheme Settings
 " ########################################################################
-" NOTE: colorscheme is set in the plugin manager
 syntax enable
 syntax on
 set termguicolors
